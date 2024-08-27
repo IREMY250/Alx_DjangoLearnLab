@@ -71,20 +71,30 @@ class RegisterView(CreateView):
 def check_role(user, role):
     return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == role
 
-# Admin view
-@user_passes_test(lambda user: check_role(user, 'Admin'))
 def admin_view(request):
-    return render(request, 'relationship_app/admin_view.html')
+    # Admin-specific content here
+    return render(request, 'admin_view.html')
 
-# Librarian view
-@user_passes_test(lambda user: check_role(user, 'Librarian'))
 def librarian_view(request):
-    return render(request, 'relationship_app/librarian_view.html')
+    # Librarian-specific content here
+    return render(request, 'librarian_view.html')
 
-# Member view
-@user_passes_test(lambda user: check_role(user, 'Member'))
 def member_view(request):
-    return render(request, 'relationship_app/member_view.html')
+    # Member-specific content here
+    return render(request, 'member_view.html')
+
+def has_admin_role(user):
+    return user.userprofile.role == 'Admin'
+
+def has_librarian_role(user):
+    return user.userprofile.role == 'Librarian'
+
+def has_member_role(user):
+    return user.userprofile.role == 'Member'
+
+admin_view = user_passes_test(has_admin_role)(admin_view)
+librarian_view = user_passes_test(has_librarian_role)(librarian_view)
+member_view = user_passes_test(has_member_role)(member_view)
 
 # Add book view
 @permission_required('relationship_app.can_add_book', raise_exception=True)
