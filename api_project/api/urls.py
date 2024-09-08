@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import CustomBookCreateView, CustomBookListView, CustomBookDetailView, CustomBookUpdateView, CustomBookDeleteView
+from . import views
 
 urlpatterns = [
-    path('books/', CustomBookListView.as_view(), name='list'),
-    path('books/<int:pk>', CustomBookDetailView.as_view(), name='detail'),
-    path('books/update/<int:pk>', CustomBookUpdateView.as_view(), name='update'),
-    path('books/delete/<int:pk>', CustomBookDeleteView.as_view(), name='delete'),
-    path('books/create', CustomBookCreateView.as_view(), name='create'),
+    path('books/', views.BookListView.as_view(), name='book-list'),
+    path('books/<int:pk>/', views.BookDetailView.as_view(), name='book-detail'),
+    path('books/create/', views.BookCreateView.as_view(), name='book-create'),
+    # Updated URLs for Update and Delete (using PUT and DELETE methods)
+    path('books/<int:pk>/update/', views.BookUpdateView.as_view(), name='book-update'),
+    path('books/<int:pk>/delete/', views.BookDeleteView.as_view(), name='book-delete'),
 ]
