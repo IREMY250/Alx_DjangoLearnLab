@@ -1,24 +1,26 @@
-from rest_framework import generics, permissions
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 from .models import Book
 from .serializers import BookSerializer
 
-class BookListView(generics.ListCreateAPIView):
-    """
-    List all books or create a new book.
-    GET: Retrieve a list of books.
-    POST: Create a new book.
-    """
+class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [permissions.AllowAny]
 
-class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve, update, or delete a book instance.
-    GET: Retrieve a book by ID.
-    PUT: Update a book by ID.
-    DELETE: Delete a book by ID.
-    """
+class BookDetailView(generics.Serializer
+    lookup_field = 'pk'  # Use primary key for lookup
+
+class BookCreateView(generics.CreateAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]Serializer
+
+class BookUpdateView(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]  # Set permission later
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    lookup_field = 'pk'
+
+class BookDeleteView(generics.DestroyAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]  # Set permission later
+    queryset = Book.objects.all()
+    lookup_field = 'pk'
