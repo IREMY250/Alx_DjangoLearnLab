@@ -1,10 +1,35 @@
 from django.urls import path
-from .views import CustomBookCreateView, CustomBookListView, CustomBookDetailView, CustomBookUpdateView, CustomBookDeleteView
+from .views import BookListCreateView, BookRetrieveUpdateDestroyView
+from .views import BookListCreateView, BookDetailView, BookUpdateView, BookDeleteView
 
 urlpatterns = [
-    path('books/', CustomBookListView.as_view(), name='list'),
-    path('books/<int:pk>', CustomBookDetailView.as_view(), name='detail'),
-    path('books/update/<int:pk>', CustomBookUpdateView.as_view(), name='update'),
-    path('books/delete/<int:pk>', CustomBookDeleteView.as_view(), name='delete'),
-    path('books/create', CustomBookCreateView.as_view(), name='create'),
+    path('books/', BookListCreateView.as_view(), name='book-list-create'),
+    path('books/<int:pk>/', BookDetailView.as_view(), name='book-detail'),
+    path('books/<int:pk>/update/', BookUpdateView.as_view(), name='book-update'),
+    path('books/<int:pk>/delete/', BookDeleteView.as_view(), name='book-delete'),
+    path('books/', BookListCreateView.as_view(), name='book-list-create'),
+    path('books/<int:pk>/', BookRetrieveUpdateDestroyView.as_view(), name='book-detail-update-delete'),
+    # List all books and create a new book
+    path('books/', BookListCreateView.as_view(), name='book-list-create'),
+
+    # Retrieve a single book
+    path('books/<int:pk>/', BookDetailView.as_view(), name='book-detail'),
+
+    # Create a new book (if you want a separate view for this, though it's combined in ListCreate)
+    path('books/create/', BookListCreateView.as_view(), name='book-create'),
+
+    # Update a book by its ID
+    path('books/update/<int:pk>/', BookUpdateView.as_view(), name='book-update'),
+
+    # Delete a book by its ID
+    path('books/delete/<int:pk>/', BookDeleteView.as_view(), name='book-delete'),
 ]
+
+
+ 
+
+ 
+
+ 
+
+ 
