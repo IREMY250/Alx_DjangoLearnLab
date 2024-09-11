@@ -4,10 +4,10 @@ from . import views
 urlpatterns = [
     # List and Detail views (already existing)
     path('books/', views.CustomBookListView.as_view(), name='book-list'),
-    path('books/<int:pk>/', views.BookDetailView.as_view(), name='book-detail'),
+    path('books/<int:pk>/', views.CustomBookDetailView.as_view(), name='book-detail'),
 
     # Create, Update, and Delete views
-    path('books/create/', views.BookCreateView.as_view(), name='book-create'),
-    path('books/update/', views.BookUpdateView.as_view(), name='book-update'),
-    path('books/delete/', views.BookDeleteView.as_view(), name='book-delete'),
+    path('books/create/', views.CustomBookCreateView.as_view(), name='book-create'),
+    path('books/update/', views.CustomBookUpdateView.as_view(), name='book-update'),
+    path('books/delete/', views.CustomBookDeleteView.as_view(), name='book-delete'),
 ]
