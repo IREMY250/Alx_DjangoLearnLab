@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     # List and Detail views (already existing)
-    path('books/', views.BookListView.as_view(), name='book-list'),
+    path('books/', views.CustomBookListView.as_view(), name='book-list'),
     path('books/<int:pk>/', views.BookDetailView.as_view(), name='book-detail'),
 
     # Create, Update, and Delete views
