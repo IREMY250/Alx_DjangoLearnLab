@@ -8,6 +8,8 @@ urlpatterns = [
 
     # Create, Update, and Delete views
     path('books/create/', views.BookCreateView.as_view(), name='book-create'),
-    path('books/update/', views.BookUpdateView.as_view(), name='book-update'),
-    path('books/delete/', views.BookDeleteView.as_view(), name='book-delete'),
+    
+    # Update and Delete paths should include <int:pk>
+    path('books/update/<int:pk>/', views.BookUpdateView.as_view(), name='book-update'),
+    path('books/delete/<int:pk>/', views.BookDeleteView.as_view(), name='book-delete'),
 ]
