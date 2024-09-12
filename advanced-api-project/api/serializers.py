@@ -7,6 +7,8 @@ class BookSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'publication_year', 'author']
 
     def validate_publication_year(self, value):
+         # Ensure the publication year is not in the future
+        
         if value > 2024:  # Replace 2024 with the current year or dynamically get the current year
             raise serializers.ValidationError("Publication year cannot be in the future.")
         return value
@@ -17,3 +19,4 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ['id', 'name', 'books']
+    # The books field is nested and serialized using BookSerializer.
