@@ -2,9 +2,9 @@ from rest_framework import generics, permissions, status
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from .serializers import UserSerializer
-from .accounts.accounts.models import CustomUser
+from .models import CustomUser
 from django.shortcuts import get_object_or_404
-from .accounts.accounts.models import CustomUser
+from .models import CustomUser
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = UserSerializer
@@ -47,9 +47,9 @@ class UnfollowUserView(generics.GenericAPIView):
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from .serializers import UserSerializer
-from .accounts.accounts.models import CustomUser
+from .models import CustomUser
 from django.shortcuts import get_object_or_404
-from .accounts.accounts.models import CustomUser
+from .models import CustomUser
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = UserSerializer
